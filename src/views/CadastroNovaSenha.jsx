@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
@@ -6,13 +7,26 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from "react";
+import { atualizarSenhaComToken } from "../services/CadastroService";
 
 
 export function CadastroNovaSenha() {
   const [showPassword, setShowPassword] = useState(false)
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  
+  const atualizarSenha = async () => {
+    if(password !== passwordConfirm) {
+      alert('As senhas devem ser iguais')
+      return
+    }
+
+    if(location.search.includes('token=')) {
+      const [, token] = location.search.split('=')
+      await atualizarSenhaComToken(token, password)
+      location.href = 'http://localhost:3000/login'
+    }
+
+  }
   return (
 
     <Container>
@@ -63,6 +77,7 @@ export function CadastroNovaSenha() {
                   <Button
                     variant="success"
                     type="button"
+                    onClick={() => atualizarSenha()}
                   >
                     Atualizar senha
                   </Button>

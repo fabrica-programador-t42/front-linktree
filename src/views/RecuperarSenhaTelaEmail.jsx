@@ -8,10 +8,21 @@ import Image from "react-bootstrap/Image";
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
+import { recuperarSenhaPorEmail } from "../services/CadastroService";
 
 export function RecuperarSenhaTelaEmail() {
   const [email, setEmail] = useState("");
 
+  const recuperarSenha = async () => {
+    if(!email) {
+      alert('Informe o email')
+      return
+    }
+
+    const response = await recuperarSenhaPorEmail(email)
+
+    console.log(response);
+  }
 
   return (
     <Container>
@@ -49,6 +60,7 @@ export function RecuperarSenhaTelaEmail() {
                   <Button
                     variant="success"
                     type="button"
+                    onClick={() => recuperarSenha()}
                   >
                     Recuperar
                   </Button>
