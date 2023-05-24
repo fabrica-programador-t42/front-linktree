@@ -52,7 +52,7 @@ const routerLogged = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const isLogged = false
+const isLogged = true
 
 root.render(
   <React.StrictMode>

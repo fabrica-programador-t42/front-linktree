@@ -1,5 +1,8 @@
 import { Outlet } from "react-router-dom";
 
 export function NotLoggedArea() {
-    return <Outlet/>
+    return <>
+    <div style={{backgroundColor: 'red'}}>sçjaslkdnsjd</div>
+    <Outlet/>
+    </>
 }
