@@ -11,6 +11,8 @@ import { NotLoggedArea } from './pages/NotLoggedArea';
 import { DashboardArea } from './pages/DashboardArea';
 import { RecuperarSenhaTelaEmail } from './views/RecuperarSenhaTelaEmail';
 import { CadastroNovaSenha } from './views/CadastroNovaSenha';
+import { Perfil } from './views/Perfil';
+import { MeusLinks } from './views/MeusLinks';
 
 const routerNotLogged = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const routerLogged = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
+      },
+      {
+        path: '/perfil',
+        element: <Perfil></Perfil>
+      },
+      {
+        path: '/meus-links',
+        element: <MeusLinks></MeusLinks>
       }
     ]
   }
