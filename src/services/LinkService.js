@@ -8,3 +8,33 @@ export async function buscarLinksPorId(id){
         console.log(error)
     }
 }
+
+export async function adicionarLink(idUser, data) {
+    try {
+        const res = await AxiosClient.put(`/usuarios/adicionar-link/${idUser}`, data)
+        console.log(res.data)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function editarLink(idUser, data) {
+    try {
+        const res = await AxiosClient.put(`/usuarios/editar-link/${idUser}`, data)
+        console.log(res.data)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function deletarLink(idUser, idDoLink) {
+    try {
+        const res = await AxiosClient.put(`/usuarios/deletar-link/${idUser}`, {idDoLink})
+        console.log(res.data)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
