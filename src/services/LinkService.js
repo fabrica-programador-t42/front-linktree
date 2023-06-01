@@ -1,5 +1,14 @@
 import AxiosClient from "./Api";
 
+export async function buscarTodosOsLinks() {
+    try {
+        const res = await AxiosClient.get(`/buscar-links-de-usuarios`)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function buscarLinksPorId(id){
     try {
         const res = await AxiosClient.get(`/usuarios/${id}`)
