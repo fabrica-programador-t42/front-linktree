@@ -6,37 +6,36 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { login } from "../redux/authSlice";
+import { showSnackbar } from "../redux/snackbarSlice";
 
 export function Login() {
   const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [alertSetup, setAlertSetup] = useState({
-    showAlert: false,
-    variant: "danger",
-    message: "Uma Mensagem default",
-  });
-
   const showAlertError = (message) => {
-    setAlertSetup({
-      message,
-      variant: "danger",
-      showAlert: true,
-    });
+    dispatch(
+      showSnackbar({
+        variant: "danger",
+        title: 'Um erro ocorreu =(',
+        message
+      })
+    )
+    
   };
 
   const showSuccessAlert = (message) => {
-    setAlertSetup({
-      message,
-      variant: "success",
-      showAlert: true,
-    });
+    dispatch(
+      showSnackbar({
+        variant: "success",
+        title: 'Bem Vindo!',
+        message
+      })
+    )
   };
 
   const makeLogin = async () => {
@@ -91,7 +90,7 @@ export function Login() {
                   <Button style={{ float: "right" }} variant="link">
                     <Link to='/recuperar-senha'>Recuperar Senha</Link>
                   </Button>
-                  
+
                   <Form.Control
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
@@ -116,11 +115,6 @@ export function Login() {
             </Card.Body>
           </Card>
         </Col>
-        {alertSetup.showAlert ? (
-          <Alert variant={alertSetup.variant}>{alertSetup.message}</Alert>
-        ) : (
-          <></>
-        )}
       </Row>
     </Container>
   );
