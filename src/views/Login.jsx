@@ -8,10 +8,12 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
-
+import {useDispatch} from 'react-redux';
 import { Link } from "react-router-dom";
+import { login } from "../redux/authSlice";
 
 export function Login() {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -39,12 +41,12 @@ export function Login() {
 
   const makeLogin = async () => {
     try {
-      const res = await axios.post("https://fabrica.lambdatech.com.br/usuarios/login", {
+      const res = await axios.post("https://fabrica.lambdatech.com.br/login", {
         email,
         senha: password,
       });
       showSuccessAlert(`Você está logado!! Bem Vindo ${res.data.nome} :)`);
-      console.log(res.data);
+      dispatch(login(res.data))
     } catch (error) {
       console.log(error.response.data);
       showAlertError(error.response.data.mensagem);
